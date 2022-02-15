@@ -23,4 +23,13 @@ class DashboardViewModel: ViewModel() {
         }
         return api1Response
     }
+
+    fun callApi2(): LiveData<ResultStatus> {
+        viewModelScope.launch(Dispatchers.IO) {
+            dataRepository.getApi2Data().let {
+                _api1Response.postValue(it)
+            }
+        }
+        return api1Response
+    }
 }

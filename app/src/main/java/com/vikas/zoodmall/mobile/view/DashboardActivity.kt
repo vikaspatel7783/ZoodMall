@@ -33,7 +33,7 @@ class DashboardActivity : AppCompatActivity() {
         })
     }
 
-    private fun handleApi1Success(data: List<Api1UIModel>) {
+    private fun handleApi1Success(data: List<ApiUIModel>) {
         val imageListAdapter = ImageListAdapter(
                 dataSet = data
         ) {

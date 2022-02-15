@@ -7,11 +7,10 @@ import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.vikas.zoodmall.mobile.R
-import com.vikas.zoodmall.mobile.network.model.api1.Api1Model
-import com.vikas.zoodmall.mobile.view.Api1UIModel
+import com.vikas.zoodmall.mobile.view.ApiUIModel
 
-class ImageListAdapter(private val dataSet: List<Api1UIModel>,
-                       private val onClick: (Api1UIModel) -> Unit) :
+class ImageListAdapter(private val dataSet: List<ApiUIModel>,
+                       private val onClick: (ApiUIModel) -> Unit) :
     RecyclerView.Adapter<ImageListAdapter.ViewHolder>() {
 
     /**
@@ -30,7 +29,7 @@ class ImageListAdapter(private val dataSet: List<Api1UIModel>,
         val viewHolder = ViewHolder(view)
 
         viewHolder.bannerImage.setOnClickListener {
-            onClick(it.tag as Api1UIModel)
+            onClick(it.tag as ApiUIModel)
         }
 
         return viewHolder
