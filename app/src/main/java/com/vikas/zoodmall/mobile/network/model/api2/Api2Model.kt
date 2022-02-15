@@ -1,9 +1,11 @@
 package com.vikas.zoodmall.mobile.network.model.api2
 
+import com.google.gson.annotations.SerializedName
+
 data class Api2Model(
-    val data: Data,
-    val ErrorCode: String,
-    val Message: String
+        @field:SerializedName("Data") val data: Data,
+        val ErrorCode: String,
+        val Message: String
 ) {
     data class Data(
         val pagination: Pagination,

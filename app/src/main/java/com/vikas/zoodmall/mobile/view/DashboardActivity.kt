@@ -1,10 +1,12 @@
 package com.vikas.zoodmall.mobile.view
 
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.vikas.zoodmall.mobile.R
@@ -15,6 +17,7 @@ class DashboardActivity : AppCompatActivity() {
 
     private val dashboardViewModel: DashboardViewModel by viewModels()
     private val recyclerViewApi1: RecyclerView by lazy { findViewById(R.id.recyclerview_api1) }
+    private val recyclerViewApi2: RecyclerView by lazy { findViewById(R.id.recyclerview_api2) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,6 +30,20 @@ class DashboardActivity : AppCompatActivity() {
                     handleApi1Success(resultStatus.data)
                 }
                 is ResultStatus.Failure -> {
+                    resultStatus.exception.printStackTrace()
+                    Toast.makeText(this, resultStatus.exception.message, Toast.LENGTH_LONG).show()
+                }
+            }
+        })
+
+        dashboardViewModel.callApi2().observe(this, { resultStatus ->
+
+            when(resultStatus) {
+                is ResultStatus.Success -> {
+                    handleApi2Success(resultStatus.data)
+                }
+                is ResultStatus.Failure -> {
+                    resultStatus.exception.printStackTrace()
                     Toast.makeText(this, resultStatus.exception.message, Toast.LENGTH_LONG).show()
                 }
             }
@@ -54,5 +71,16 @@ class DashboardActivity : AppCompatActivity() {
 
         }
         job.start()
+    }
+
+    private fun handleApi2Success(data: List<ApiUIModel>) {
+        val imageListAdapter = ImageListAdapter(
+                dataSet = data
+        ) {
+            Toast.makeText(this, "${it.id} clicked", Toast.LENGTH_SHORT).show()
+        }
+        recyclerViewApi2.layoutManager = GridLayoutManager(applicationContext, 2)
+        recyclerViewApi2.adapter = imageListAdapter
+
     }
 }

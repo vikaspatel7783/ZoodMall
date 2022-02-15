@@ -8,7 +8,7 @@
     app:contentPadding="8dp"
     app:cardCornerRadius="8dp"
     app:cardElevation="8dp"
-    app:cardBackgroundColor="#0F9D58">
+    app:cardBackgroundColor="@color/white">
 
     <ImageView
         android:id="@+id/glide_image"
