@@ -55,7 +55,7 @@ class DataRepository {
                 val api2Model = zoodMallService.callApi2(page = position)
 
                 if (api2Model.ErrorCode != "9999" && api2Model.Message.toUpperCase(Locale.ROOT) != "SUCCESS") {
-                    throw Exception("Api2 returned failure code")
+                    return LoadResult.Error(Exception("Api2 returned failure code"))
                 }
 
                 val api2UIModels = mutableListOf<ApiUIModel>()
