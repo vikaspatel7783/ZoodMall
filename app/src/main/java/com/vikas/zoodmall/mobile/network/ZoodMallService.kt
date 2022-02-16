@@ -7,14 +7,19 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
+import retrofit2.http.Path
+import retrofit2.http.Query
 
 interface ZoodMallService {
 
     @GET("home?marketCode=UZ")
     suspend fun callApi1(): Api1Model
 
-    @GET("productlist?page=1&productTagId=13&marketCode=UZ")
-    suspend fun callApi2(): Api2Model
+    @GET("productlist")
+    suspend fun callApi2(
+        @Query("page") page: Int = 1,
+        @Query("productTagId") productTagId: String = "13",
+        @Query("marketCode") marketCode: String = "UZ"): Api2Model
 
     companion object {
         private const val BASE_URL = "http://qvr9g.mocklab.io/"

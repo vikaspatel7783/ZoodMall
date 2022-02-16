@@ -21,9 +21,7 @@ class ImageListAdapter(private val dataSet: List<ApiUIModel>,
         val bannerImage: ImageView = view.findViewById(R.id.glide_image)
     }
 
-    // Create new views (invoked by the layout manager)
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ViewHolder {
-        // Create a new view, which defines the UI of the list item
         val view = LayoutInflater.from(viewGroup.context)
             .inflate(R.layout.api1_image_item, viewGroup, false)
         val viewHolder = ViewHolder(view)
@@ -43,8 +41,6 @@ class ImageListAdapter(private val dataSet: List<ApiUIModel>,
             .load(banner.imageUrl)
             .placeholder(R.drawable.round_corner)
             .into(viewHolder.bannerImage)
-
-
     }
 
     override fun getItemCount() = dataSet.size
