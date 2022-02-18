@@ -25,6 +25,8 @@
             android:layout_below="@id/recyclerview_api1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:scrollbars="vertical"
+            android:scrollbarThumbVertical="@color/purple_700"
             android:paddingTop="5dp"
             android:layout_margin="5dp"/>
 

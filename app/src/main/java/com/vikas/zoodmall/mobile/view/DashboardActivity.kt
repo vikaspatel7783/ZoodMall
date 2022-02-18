@@ -3,6 +3,7 @@ package com.vikas.zoodmall.mobile.view
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
@@ -12,6 +13,7 @@ import com.vikas.zoodmall.mobile.R
 import com.vikas.zoodmall.mobile.adapter.Api2PagingAdapter
 import com.vikas.zoodmall.mobile.adapter.ImageDataComparator
 import com.vikas.zoodmall.mobile.adapter.ImageListAdapter
+import com.vikas.zoodmall.mobile.network.NetworkCheck
 import kotlinx.coroutines.CoroutineStart
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -29,6 +31,12 @@ class DashboardActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_dashboard)
+
+        if (!NetworkCheck.isDeviceOnline(this)) {
+            showAlertDialog("No Network", "Could not connect to Internet. Please enable it")
+            return
+        }
+
         recyclerViewApi2.adapter = pagingAdapter
         recyclerViewApi2.layoutManager = GridLayoutManager(applicationContext, 2)
 
@@ -74,6 +82,17 @@ class DashboardActivity : AppCompatActivity() {
 
         }
         job.start()
+    }
+
+    private fun showAlertDialog(title: String, message: String) {
+        AlertDialog.Builder(this)
+                .setTitle(title)
+                .setMessage(message)
+                .setCancelable(false)
+                .setPositiveButton("DISMISS") { dialogInterface, which ->
+                    finish()
+                }
+                .show()
     }
 
 }
